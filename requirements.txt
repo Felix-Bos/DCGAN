@@ -1,0 +1,6 @@
+torch>=2.1
+torchvision>=0.16
+tensorboard>=2.14
+pyyaml>=6.0
+pillow>=10.0
+numpy

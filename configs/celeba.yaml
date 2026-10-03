@@ -1,0 +1,35 @@
+# Configuration DCGAN — visages CelebA
+experiment_name: celeba_dcgan
+seed: 10
+device: mps            # auto | cuda | mps | cpu
+
+data:
+  root: data/img_align_celeba
+  partition_file: data/Eval/list_eval_partition.txt   # null pour utiliser toutes les images
+  split: train            # train | val | test | all
+  image_size: 64
+  max_images: null        # ex. 20000 pour un entraînement rapide
+  batch_size: 128
+  num_workers: 4
+
+model:
+  nz: 100                 # taille du vecteur latent
+  ngf: 64                 # feature maps du générateur
+  ndf: 64                 # feature maps du discriminateur
+  nc: 3                   # canaux (RVB)
+
+train:
+  epochs: 25
+  lr_g: 0.0002
+  lr_d: 0.0002
+  beta1: 0.5
+  beta2: 0.999
+  label_smoothing: 0.0    # ex. 0.1 -> labels réels à 0.9
+  log_every: 50           # pas entre deux logs TensorBoard
+  sample_every: 500       # pas entre deux grilles d'images dans TensorBoard
+  num_samples: 64         # nombre d'images dans la grille fixe
+
+output:
+  dir: runs                       # runs/<experiment_name>/{tensorboard,checkpoints,samples}
+  checkpoint_every: 1             # en époques
+  keep_last: 5                    # nombre de checkpoints conservés (null = tous)
